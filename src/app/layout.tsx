@@ -22,6 +22,9 @@ export const metadata: Metadata = {
     template: `%s | ${site.name}`,
   },
   description: site.bio,
+  icons: {
+    icon: [{ url: "/studying.gif", type: "image/gif" }],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
