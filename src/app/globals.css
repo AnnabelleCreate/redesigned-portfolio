@@ -1,0 +1,170 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #f4f4f1;
+  --ink: #1c1730;
+  --muted: #5c5670;
+  --lavender: #d9cef3;
+  --lavender-deep: #c4b4ea;
+  --crayon: #6b5cb8;
+  --crayon-soft: #8a7cc9;
+  --pill: #eee6fb;
+  --line: rgba(28, 23, 48, 0.08);
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-lavender: var(--lavender);
+  --color-lavender-deep: var(--lavender-deep);
+  --color-crayon: var(--crayon);
+  --color-crayon-soft: var(--crayon-soft);
+  --color-pill: var(--pill);
+  --color-line: var(--line);
+  --font-sans: var(--font-outfit);
+  --font-serif: var(--font-fraunces);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-outfit), system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--lavender);
+  color: var(--ink);
+}
+
+.crayon-panel {
+  background:
+    radial-gradient(1200px 400px at 20% -10%, rgba(255, 255, 255, 0.45), transparent 50%),
+    linear-gradient(180deg, #e4daf8 0%, var(--lavender) 55%, #d2c6f0 100%);
+}
+
+.grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.link-arrow {
+  transition: transform 180ms ease;
+}
+
+a:hover .link-arrow {
+  transform: translate(2px, -2px);
+}
+
+.flip-slot {
+  perspective: 640px;
+  overflow: hidden;
+}
+
+@keyframes flip-in {
+  from {
+    opacity: 0;
+    transform: rotateX(-80deg) translateY(0.45em);
+  }
+  to {
+    opacity: 1;
+    transform: rotateX(0deg) translateY(0);
+  }
+}
+
+@keyframes flip-out {
+  from {
+    opacity: 1;
+    transform: rotateX(0deg) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: rotateX(80deg) translateY(-0.45em);
+  }
+}
+
+.flip-word-in {
+  transform-origin: 50% 70%;
+  backface-visibility: hidden;
+  animation: flip-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.flip-word-out {
+  transform-origin: 50% 30%;
+  backface-visibility: hidden;
+  animation: flip-out 0.32s ease-in both;
+}
+
+.checkerboard {
+  background-color: #f3f3f3;
+  background-image:
+    linear-gradient(45deg, #e6e6e6 25%, transparent 25%),
+    linear-gradient(-45deg, #e6e6e6 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #e6e6e6 75%),
+    linear-gradient(-45deg, transparent 75%, #e6e6e6 75%);
+  background-size: 28px 28px;
+  background-position: 0 0, 0 14px, 14px -14px, -14px 0;
+}
+
+.crayon-caption {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow:
+    0 0 0 2px #9d8ad6,
+    1.5px 2px 0 2px #c4b4ea,
+    -1.5px -0.5px 0 1.5px #b7a3e4,
+    0 3px 0 0 rgba(109, 92, 184, 0.12);
+}
+
+.figjam-canvas {
+  background-color: #f4f4f1;
+  background-image: radial-gradient(#c9c9c4 1.15px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+
+.figjam-card {
+  background: #fff;
+  border: 1px solid rgba(28, 23, 48, 0.08);
+  border-radius: 12px;
+  box-shadow:
+    0 1px 1px rgba(28, 23, 48, 0.04),
+    0 8px 24px rgba(28, 23, 48, 0.06);
+}
+
+.figjam-card-lift {
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    rotate 220ms ease;
+}
+
+.figjam-card-lift:hover {
+  rotate: 0deg;
+  transform: translateY(-4px);
+  box-shadow:
+    0 2px 4px rgba(28, 23, 48, 0.05),
+    0 16px 40px rgba(28, 23, 48, 0.1);
+}
+
+.figjam-sticky {
+  border-radius: 2px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.45) inset,
+    1px 2px 0 rgba(28, 23, 48, 0.04),
+    0 4px 10px rgba(28, 23, 48, 0.1);
+}
+
+.figjam-note {
+  min-width: 6.6rem;
+  max-width: 11.5rem;
+  min-height: 4.1rem;
+}
