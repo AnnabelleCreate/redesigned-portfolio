@@ -18,7 +18,7 @@ export function CaseStudyView({
 
   return (
     <div className="grid w-full gap-6 px-5 pb-20 pt-6 sm:px-8 lg:grid-cols-[10.5rem_minmax(0,1fr)] lg:gap-x-6 lg:px-6">
-      <div className="figjam-card overflow-hidden lg:col-span-2">
+      <div className="figjam-card w-full max-w-[48rem] justify-self-center overflow-hidden lg:col-span-2">
         {study.hero ? (
           <Image
             src={study.hero}

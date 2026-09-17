@@ -9,10 +9,10 @@ import { projects, visualCards, type WorkKind } from "@/lib/content";
 
 const filters: { id: WorkKind; label: string }[] = [
   { id: "product", label: "Product" },
-  { id: "visual", label: "Visual" },
 ];
 
 const tagColors = ["#fff4c2", "#ead9ff", "#d4efd8", "#d6ebff"];
+const projectOrder = ["core", "cavalry", "cmused", "ladle", "homehudl", "sonaride", "gotr"];
 
 export function WorkGrid() {
   const [filter, setFilter] = useState<WorkKind>("product");
@@ -20,7 +20,13 @@ export function WorkGrid() {
   const { openStudy } = useStudyOverlay();
 
   const visible = useMemo(
-    () => projects.filter((project) => project.kind === filter),
+    () =>
+      projects
+        .filter((project) => project.kind === filter)
+        .sort(
+          (first, second) =>
+            projectOrder.indexOf(first.slug) - projectOrder.indexOf(second.slug),
+        ),
     [filter],
   );
 
@@ -84,6 +90,7 @@ export function WorkGrid() {
                         style={{
                           background: tagColors[tagIndex % tagColors.length],
                           rotate: `${[-0.8, 0.6, -0.4, 0.9][tagIndex % 4]}deg`,
+                          boxShadow: "none",
                         }}
                       >
                         {tag}
