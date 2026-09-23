@@ -89,9 +89,12 @@ export const projects: Project[] = [
   },
   {
     slug: "ladle",
-    title: "Ladle",
-    description: "Founding UX/UI internship — product, systems, and handoff for an early-stage team.",
-    recruiter: "Founding UX/UI intern at Ladle. Password-protected case study.",
+    title: "Rebranding Menopause Wellness",
+    description:
+      "Built Ladle’s accessible brand system and designed its meal planner and journal experience.",
+    recruiter:
+      "Founding UX/UI intern who rebranded Ladle for menopausal women, built its UI system, and designed core planning and journaling features.",
+    image: "/ladle-thumbnail.jpg",
     tags: ["Internship", "Product Designer"],
     kind: "product",
     href: "/work/ladle",
@@ -100,9 +103,12 @@ export const projects: Project[] = [
   },
   {
     slug: "homehudl",
-    title: "HomeHudl",
-    description: "Founding UX/UI internship — product, systems, and handoff for an early-stage team.",
-    recruiter: "Founding UX/UI intern at HomeHudl. Password-protected case study.",
+    title: "Accelerating Startup Prototyping",
+    description:
+      "Developed a clear design process and used Claude and Figma Make to prototype at startup speed.",
+    recruiter:
+      "Founding UX/UI intern who established a clearer product process and expanded rapid prototyping through Claude and Figma Make.",
+    image: "/homehudl-thumbnail.png",
     tags: ["Internship", "Product Designer"],
     kind: "product",
     href: "/work/homehudl",
@@ -577,91 +583,111 @@ export const caseStudies: CaseStudy[] = [
       },
     ],
   },
-  internTemplate({
+  {
     slug: "ladle",
-    title: "Ladle",
+    title: "Designing Ladle for menopausal women",
     summary:
-      "Founding UX/UI internship at Ladle. This case study is a working template — structure, image slots, and intern framing are in place so the story can be filled in without rebuilding the page.",
-  }),
-  internTemplate({
-    slug: "homehudl",
-    title: "HomeHudl",
-    summary:
-      "Founding UX/UI internship at HomeHudl. This case study is a working template — structure, image slots, and intern framing are in place so the story can be filled in without rebuilding the page.",
-  }),
-];
-
-function internTemplate({
-  slug,
-  title,
-  summary,
-}: {
-  slug: string;
-  title: string;
-  summary: string;
-}): CaseStudy {
-  return {
-    slug,
-    title,
-    summary,
+      "As Ladle shifted its focus to menopausal women, I helped translate a new color brief into an accessible brand and consistent product experience. I built the design system and UI kit, designed the meal planner, and spearheaded a journal feature in close collaboration with development.",
     locked: true,
     meta: [
-      { label: "Role", value: "Product designer" },
+      { label: "Role", value: "Founding UX/UI intern" },
       { label: "Type", value: "Internship" },
       {
         label: "Skill",
-        value: "Product design, prototyping, cross-functional collaboration",
+        value:
+          "Accessible branding, design systems, product design, prototyping, AI-assisted development",
       },
-      { label: "Duration", value: "Founding intern" },
-      { label: "Team", value: "Early-stage team" },
+      { label: "Focus", value: "Women in their 40s–50s" },
+      { label: "Team", value: "Cross-functional startup team" },
     ],
     sections: [
       {
-        id: "problem",
-        label: "Problem",
-        kicker: "The problem",
-        title: "What we were asked to make clearer.",
-        body: "Add the intern brief, users, and the friction that made a founding designer necessary.",
+        id: "rebrand",
+        label: "Rebrand",
+        kicker: "Repositioning the product",
+        title: "Rebranding Ladle after its shift toward menopausal women.",
+        body: "I took the new color brief and translated it into a product direction that felt relevant to women in their 40s and 50s. Accessibility guided the visual decisions so the refreshed brand would remain clear, legible, and comfortable to use.",
         imageSlots: 2,
       },
       {
-        id: "goal",
-        label: "Goal",
-        kicker: "The goal",
-        title: "The outcome the team needed from design.",
-        imageSlots: 1,
-      },
-      {
-        id: "solution",
-        label: "Solution",
-        kicker: "Solution overview",
-        title: "What shipped, and what the system needed to support.",
+        id: "system",
+        label: "Design System",
+        kicker: "Building consistency",
+        title: "Creating a shared design system and UI kit.",
+        body: "I established reusable foundations and interface components so Ladle could stay visually consistent as the product grew. The system gave design and development a common language for building and reviewing new experiences.",
         imageSlots: 2,
       },
+      {
+        id: "meal-planner",
+        label: "Meal Planner",
+        kicker: "Core product feature",
+        title: "Designing the meal planner experience.",
+        body: "I designed Ladle’s meal planner feature, organizing the experience around the decisions users need to make when planning meals and turning those decisions into a clear, repeatable flow.",
+        imageSlots: 2,
+      },
+      {
+        id: "journal",
+        label: "Journal",
+        kicker: "Design to development",
+        title: "Spearheading the journal feature with development.",
+        body: "I led the journal feature from concept through implementation and worked directly with development using Figma Make and Claude Code. This let us explore, prototype, and resolve implementation details together instead of treating handoff as a final step.",
+        imageSlots: 2,
+      },
+    ],
+  },
+  {
+    slug: "homehudl",
+    title: "Building a faster prototyping process at HomeHudl",
+    summary:
+      "At HomeHudl, I focused on creating a clear, repeatable design process while building fluency with AI prototyping tools. Using Claude and Figma Make helped me move from ideas to interactive prototypes faster and keep pace with an early-stage startup.",
+    locked: true,
+    meta: [
+      { label: "Role", value: "Founding UX/UI intern" },
+      { label: "Type", value: "Internship" },
+      {
+        label: "Skill",
+        value:
+          "Process design, rapid prototyping, Claude, Figma Make, cross-functional collaboration",
+      },
+      { label: "Focus", value: "Startup-speed iteration" },
+      { label: "Team", value: "Early-stage startup team" },
+    ],
+    sections: [
       {
         id: "process",
         label: "Process",
-        kicker: "Process",
-        title: "Research, iteration, and working with the team.",
+        kicker: "Creating clarity",
+        title: "Developing a design process the team could move through clearly.",
+        body: "I focused on making the path from an early idea to a testable direction more explicit. A clearer process made it easier to understand what needed to be explored, what was ready to prototype, and what required alignment before moving forward.",
         imageSlots: 2,
       },
       {
-        id: "impact",
-        label: "Impact",
-        kicker: "The impact",
-        title: "What changed for the product and the team.",
-        imageSlots: 1,
+        id: "ai-prototyping",
+        label: "AI Prototyping",
+        kicker: "Building fluency",
+        title: "Using Claude and Figma Make as active prototyping tools.",
+        body: "I built fluency with Claude and Figma Make by incorporating them into the design process rather than treating them as one-off experiments. They helped me translate concepts into interactive prototypes and evaluate ideas earlier.",
+        imageSlots: 2,
       },
       {
-        id: "reflections",
-        label: "Reflections",
-        kicker: "Reflections",
-        title: "What I would do next.",
+        id: "iteration",
+        label: "Rapid Iteration",
+        kicker: "Meeting startup speed",
+        title: "Increasing prototyping speed without losing design intent.",
+        body: "The goal was not speed for its own sake. I used faster prototyping cycles to make decisions more concrete, communicate interactions clearly, and keep design moving at the pace the startup required.",
+        imageSlots: 2,
+      },
+      {
+        id: "learning",
+        label: "Learning",
+        kicker: "What I developed",
+        title: "A more adaptable way of moving between design and implementation.",
+        body: "The experience strengthened my ability to define a process, choose the right level of prototype, and use AI-assisted tools to close the distance between an interface concept and something the team could respond to.",
         imageSlots: 1,
       },
     ],
-  };
-}
+  },
+];
 
 export function getCaseStudy(slug: string) {
   return caseStudies.find((study) => study.slug === slug);
