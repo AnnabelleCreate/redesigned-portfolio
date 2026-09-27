@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 type Category = "Learning" | "Accessibility" | "Travel" | "Community" | "Tools";
 
@@ -173,136 +173,105 @@ const ideas: Idea[] = [
   },
 ];
 
-const categories: Array<"All" | Category> = [
-  "All",
-  "Learning",
-  "Accessibility",
-  "Travel",
-  "Community",
-  "Tools",
-];
-
 export function IdeaSandbox() {
-  const [category, setCategory] = useState<(typeof categories)[number]>("All");
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [order, setOrder] = useState(() => ideas.map((idea) => idea.id));
 
-  const visibleIdeas = useMemo(() => {
-    const ordered = order
-      .map((id) => ideas.find((idea) => idea.id === id))
-      .filter((idea): idea is Idea => Boolean(idea));
-    return category === "All"
-      ? ordered
-      : ordered.filter((idea) => idea.category === category);
-  }, [category, order]);
-
-  function shuffleIdeas() {
-    setOrder((current) => {
-      const shuffled = [...current];
-      for (let index = shuffled.length - 1; index > 0; index -= 1) {
-        const next = Math.floor(Math.random() * (index + 1));
-        [shuffled[index], shuffled[next]] = [shuffled[next], shuffled[index]];
-      }
-      return shuffled;
-    });
-  }
+  const selectedIdea = ideas.find((idea) => idea.id === selectedId);
 
   return (
-    <section className="mt-16">
-      <div className="flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <p className="text-[11px] uppercase tracking-[0.14em] text-crayon">
-            Unbuilt, for now
-          </p>
-          <h2 className="mt-1 font-serif text-3xl tracking-[-0.03em] text-ink sm:text-4xl">
-            Idea sandbox
-          </h2>
-          <p className="mt-2 max-w-2xl text-[15px] leading-6 text-muted">
-            Loose concepts, difficult questions, and things I would love to prototype
-            when time permits. Click a note to unpack the thought.
-          </p>
-        </div>
-        <button
-          type="button"
-          onClick={shuffleIdeas}
-          className="rounded-full border border-crayon/30 bg-white px-4 py-2 text-[13px] text-crayon shadow-sm transition hover:-rotate-1 hover:bg-lavender/40"
-        >
-          Shuffle the pile ↻
-        </button>
-      </div>
-
-      <div className="mt-6 flex flex-wrap gap-2" aria-label="Filter ideas">
-        {categories.map((item) => (
-          <button
-            key={item}
-            type="button"
-            onClick={() => {
-              setCategory(item);
-              setSelectedId(null);
-            }}
-            className={`rounded-full px-3.5 py-1.5 text-[12px] transition ${
-              category === item
-                ? "bg-crayon text-white"
-                : "border border-ink/10 bg-white text-ink/55 hover:text-ink"
-            }`}
-          >
-            {item}
-          </button>
-        ))}
-      </div>
+    <section className="mt-10">
+      <h2 className="font-serif text-3xl tracking-[-0.03em] text-ink sm:text-4xl">
+        My Sandbox
+      </h2>
 
       <div
-        className="mt-5 grid gap-5 rounded-[28px] border border-ink/10 bg-white/70 p-4 min-[351px]:p-6 min-[700px]:grid-cols-2"
+        className="relative mt-5 overflow-hidden rounded-[38px] border-[9px] border-[#d1a16e] bg-[#ead09d] p-5 shadow-[inset_0_8px_24px_rgba(116,74,35,0.18),0_12px_30px_rgba(74,48,24,0.08)] min-[351px]:p-7"
         style={{
-          backgroundImage: "radial-gradient(#d2d0ca 1.1px, transparent 1.2px)",
-          backgroundSize: "22px 22px",
+          backgroundImage:
+            "radial-gradient(circle at 18% 22%, rgba(255,255,255,.38) 0 1px, transparent 1.8px), radial-gradient(circle at 72% 66%, rgba(126,81,39,.13) 0 1px, transparent 2px), repeating-radial-gradient(ellipse at 50% 110%, transparent 0 22px, rgba(151,104,57,.09) 23px 25px, transparent 26px 40px)",
+          backgroundSize: "19px 19px, 27px 27px, 100% 100%",
         }}
       >
-        {visibleIdeas.map((idea, index) => {
-          const selected = selectedId === idea.id;
-          return (
-            <button
-              key={idea.id}
-              type="button"
-              aria-expanded={selected}
-              onClick={() => setSelectedId(selected ? null : idea.id)}
-              className={`figjam-sticky figjam-card-lift relative self-start p-5 text-left ${
-                selected ? "min-[700px]:col-span-2" : ""
-              }`}
-              style={{
-                background: idea.color,
-                rotate: selected ? "0deg" : `${[-1.1, 0.8, -0.5, 1.2][index % 4]}deg`,
-              }}
-            >
-              <span className="text-2xl" aria-hidden>
-                {idea.emoji}
-              </span>
-              <span className="ml-2 text-[10px] uppercase tracking-[0.12em] text-ink/45">
-                {idea.category}
-              </span>
-              <h3 className="mt-3 font-serif text-[1.35rem] leading-tight tracking-[-0.02em]">
-                {idea.title}
-              </h3>
-              <p className="mt-2 text-[14px] leading-5 text-ink/65">{idea.prompt}</p>
-              <span className="mt-4 inline-block text-[11px] font-medium uppercase tracking-[0.1em] text-crayon">
-                {selected ? "Fold note ↑" : "Open note ↓"}
-              </span>
+        <span aria-hidden className="absolute -left-4 bottom-6 rotate-12 text-5xl opacity-60">
+          🪣
+        </span>
+        <span aria-hidden className="absolute right-5 top-4 -rotate-12 text-3xl opacity-55">
+          🐚
+        </span>
 
-              {selected ? (
-                <ul className="mt-4 space-y-2 border-t border-ink/10 pt-4 text-[13px] leading-5 text-ink/70">
-                  {idea.notes.map((note) => (
-                    <li key={note} className="flex gap-2">
-                      <span aria-hidden className="text-crayon">
-                        ✦
-                      </span>
-                      <span>{note}</span>
-                    </li>
-                  ))}
-                </ul>
-              ) : null}
-            </button>
-          );
-        })}
+        <div className="relative z-10 grid grid-cols-2 gap-4 min-[601px]:grid-cols-3 min-[1000px]:grid-cols-4">
+          {ideas.map((idea, index) => {
+            const selected = selectedId === idea.id;
+            const shapes = [
+              "rounded-[48%_52%_44%_56%/55%_42%_58%_45%]",
+              "rounded-[58%_42%_53%_47%/43%_55%_45%_57%]",
+              "rounded-[43%_57%_47%_53%/58%_46%_54%_42%]",
+            ];
+            return (
+              <button
+                key={idea.id}
+                type="button"
+                aria-expanded={selected}
+                aria-label={`${idea.title}: ${idea.prompt}`}
+                onClick={() => setSelectedId(selected ? null : idea.id)}
+                className={`group/item relative flex min-h-28 flex-col items-center justify-center border border-white/50 px-3 py-4 text-center shadow-[0_5px_0_rgba(109,72,37,0.13),0_9px_16px_rgba(91,57,28,0.12)] transition hover:z-20 hover:-translate-y-1 hover:scale-[1.03] focus-visible:z-20 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-crayon ${shapes[index % shapes.length]} ${
+                  selected ? "ring-2 ring-crayon ring-offset-2 ring-offset-[#ead09d]" : ""
+                }`}
+                style={{
+                  background: idea.color,
+                  rotate: `${[-3, 2, -1.5, 3.5][index % 4]}deg`,
+                }}
+              >
+                <span className="text-2xl" aria-hidden>
+                  {idea.emoji}
+                </span>
+                <span className="mt-1 text-[10px] uppercase tracking-[0.1em] text-ink/50">
+                  {idea.category}
+                </span>
+                <span className="mt-1 font-serif text-[15px] leading-tight text-ink">
+                  {idea.title}
+                </span>
+                <span className="pointer-events-none absolute inset-0 z-30 flex items-center justify-center rounded-[inherit] bg-ink/95 px-3 text-[11px] leading-4 text-white opacity-0 shadow-lg transition group-hover/item:opacity-100 group-focus-visible/item:opacity-100">
+                  {idea.prompt}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        {selectedIdea ? (
+          <div className="relative z-10 mt-8 rounded-[24px] border border-[#8f633d]/20 bg-white/95 p-5 text-left shadow-[0_10px_24px_rgba(93,60,31,0.13)] min-[601px]:p-6">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.12em] text-[#8f633d]">
+                  Dug up from the sandbox · {selectedIdea.category}
+                </p>
+                <h3 className="mt-1 font-serif text-2xl tracking-[-0.02em]">
+                  {selectedIdea.emoji} {selectedIdea.title}
+                </h3>
+                <p className="mt-2 text-[14px] leading-5 text-muted">{selectedIdea.prompt}</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setSelectedId(null)}
+                aria-label="Close full idea"
+                className="rounded-full border border-ink/10 px-3 py-1 text-[12px] text-muted hover:text-ink"
+              >
+                Close
+              </button>
+            </div>
+            <ul className="mt-5 grid gap-3 text-[13px] leading-5 text-ink/75 min-[700px]:grid-cols-3">
+              {selectedIdea.notes.map((note) => (
+                <li key={note} className="rounded-xl bg-[#fff8ea] p-3">
+                  <span aria-hidden className="mr-1.5 text-[#b07842]">
+                    ✦
+                  </span>
+                  {note}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
       </div>
     </section>
   );

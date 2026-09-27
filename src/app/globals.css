@@ -46,9 +46,82 @@ body {
 }
 
 .crayon-panel {
+  --crayon: #554294;
+  isolation: isolate;
+  overflow: hidden;
   background:
-    radial-gradient(1200px 400px at 20% -10%, rgba(255, 255, 255, 0.45), transparent 50%),
-    linear-gradient(180deg, #e4daf8 0%, var(--lavender) 55%, #d2c6f0 100%);
+    radial-gradient(1200px 400px at 20% -10%, rgba(255, 255, 255, 0.64), transparent 52%),
+    linear-gradient(180deg, #f0ecfb 0%, #e9e3f8 55%, #e1daf4 100%);
+}
+
+.marble-field {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background-image:
+    linear-gradient(117deg, transparent 49.82%, rgba(83, 65, 155, 0.045) 50%, transparent 50.18%),
+    linear-gradient(28deg, transparent 49.86%, rgba(255, 255, 255, 0.18) 50%, transparent 50.14%);
+  background-size: 17rem 22rem, 13rem 18rem;
+}
+
+.marble-field::before,
+.marble-field::after,
+.marble-orb {
+  position: absolute;
+  display: block;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  content: "";
+  filter: blur(14px) saturate(98%);
+}
+
+.marble-field::before {
+  top: 5%;
+  right: -38%;
+  width: min(27rem, 112%);
+  opacity: 0.38;
+  background:
+    radial-gradient(circle at 31% 27%, rgba(255, 255, 255, 0.86) 0 5%, transparent 21%),
+    radial-gradient(circle at 72% 72%, rgba(72, 50, 145, 0.8) 0 12%, transparent 47%),
+    radial-gradient(circle at 28% 67%, rgba(143, 210, 255, 0.7) 0 9%, transparent 43%),
+    radial-gradient(circle at 62% 22%, #c99bf2 0 19%, #a694ec 43%, #6959b8 71%, #ddd5fa 100%);
+  box-shadow:
+    inset 1.2rem 1.5rem 2.8rem rgba(255, 255, 255, 0.55),
+    inset -2rem -1.4rem 3rem rgba(58, 42, 123, 0.28),
+    0 0 2.8rem rgba(100, 77, 183, 0.22);
+}
+
+.marble-field::after {
+  bottom: -10%;
+  left: -42%;
+  width: min(24rem, 105%);
+  opacity: 0.32;
+  background:
+    radial-gradient(circle at 67% 28%, rgba(255, 255, 255, 0.75) 0 4%, transparent 25%),
+    radial-gradient(circle at 28% 67%, rgba(83, 61, 162, 0.75) 0 13%, transparent 48%),
+    radial-gradient(circle at 69% 71%, rgba(235, 169, 245, 0.62) 0 15%, transparent 49%),
+    radial-gradient(circle at 52% 48%, #b7c3fa 0, #967fd9 48%, #59489d 76%, #d8d1f5 100%);
+  box-shadow:
+    inset -1.5rem 1rem 2.7rem rgba(255, 255, 255, 0.4),
+    inset 2rem -2rem 3.2rem rgba(59, 38, 126, 0.3),
+    0 0 2.5rem rgba(78, 59, 153, 0.18);
+}
+
+.marble-orb {
+  top: 43%;
+  left: 58%;
+  width: min(10rem, 42%);
+  opacity: 0.25;
+  background:
+    radial-gradient(circle at 32% 25%, rgba(255, 255, 255, 0.9) 0 6%, transparent 27%),
+    radial-gradient(circle at 68% 68%, rgba(72, 50, 145, 0.78) 0 13%, transparent 46%),
+    radial-gradient(circle at 42% 58%, #9fd9f3 0, #bb9de9 47%, #6b59b3 78%, #e4defb 100%);
+  box-shadow:
+    inset 0.7rem 0.9rem 1.5rem rgba(255, 255, 255, 0.5),
+    inset -0.9rem -0.7rem 1.6rem rgba(57, 41, 126, 0.26),
+    0 0 1.5rem rgba(76, 56, 157, 0.16);
 }
 
 .grain {

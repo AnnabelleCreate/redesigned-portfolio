@@ -18,6 +18,8 @@ export default function PlaygroundPage() {
         shops, and whatever else I was curious about that week.
       </p>
 
+      <IdeaSandbox />
+
       <div className="mt-10 columns-1 gap-5 sm:columns-2">
         {playground.map((item) => (
           <a
@@ -43,8 +45,6 @@ export default function PlaygroundPage() {
           </a>
         ))}
       </div>
-
-      <IdeaSandbox />
     </div>
   );
 }

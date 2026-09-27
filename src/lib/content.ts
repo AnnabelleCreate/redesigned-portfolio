@@ -52,7 +52,7 @@ export const traits = [
   "complexity architect",
 ];
 
-export const hobbies = ["Crochet", "Baking", "K-pop", "Puzzles"];
+export const hobbies = ["Crochet", "Baking", "K-pop", "K-dramas", "Puzzles", "Swimming"];
 
 const framer = (id: string, width = 1600) =>
   `https://framerusercontent.com/images/${id}?width=${width}`;
@@ -78,9 +78,9 @@ export const projects: Project[] = [
     slug: "cmused",
     title: "Navigating E-Commerce System",
     description:
-      "Zero to One development of CMUsed, a CMU community marketplace for students to sell and buy",
+      "Built a trusted CMU marketplace that reached 700+ users in its first week.",
     recruiter:
-      "Product designer on 0→1 campus marketplace CMUsed: 700+ users in week one, plus a design system and cross-functional launch strategy.",
+      "Built a 0→1 campus marketplace, design system, and launch strategy for 700+ first-week users.",
     image: framer("bLXS7uhMMkOTdjE5zPriYSrjXUA.png"),
     tags: ["Zero to one", "Product Designer", "Team"],
     kind: "product",
@@ -91,9 +91,9 @@ export const projects: Project[] = [
     slug: "ladle",
     title: "Rebranding Menopause Wellness",
     description:
-      "Built Ladle’s accessible brand system and designed its meal planner and journal experience.",
+      "Rebranded Ladle and designed its meal planner, journal, and UI system.",
     recruiter:
-      "Founding UX/UI intern who rebranded Ladle for menopausal women, built its UI system, and designed core planning and journaling features.",
+      "Rebranded Ladle and built its accessible UI system, meal planner, and journal.",
     image: "/ladle-thumbnail.jpg",
     tags: ["Internship", "Product Designer"],
     kind: "product",
@@ -105,9 +105,9 @@ export const projects: Project[] = [
     slug: "homehudl",
     title: "Accelerating Startup Prototyping",
     description:
-      "Developed a clear design process and used Claude and Figma Make to prototype at startup speed.",
+      "Built an AI-assisted prototyping process for startup-speed iteration.",
     recruiter:
-      "Founding UX/UI intern who established a clearer product process and expanded rapid prototyping through Claude and Figma Make.",
+      "Used Claude and Figma Make to establish a faster, clearer product process.",
     image: "/homehudl-thumbnail.png",
     tags: ["Internship", "Product Designer"],
     kind: "product",
@@ -119,9 +119,9 @@ export const projects: Project[] = [
     slug: "core",
     title: "Desktop Only to Mobile for Administrators on Call",
     description:
-      "Mobile redesign of CORE's complex and data heavy internal staff dashboard for Administrators on Call (AOCs)'s workflow",
+      "Turned a desktop-only operations tool into a mobile workflow for on-call administrators.",
     recruiter:
-      "Lead designer for a 6-week mobile redesign of a desktop-only organ donation ops tool. 94% unaided task success; handed off to production.",
+      "Led a mobile redesign that reached 94% unaided task success and production handoff.",
     image: framer("RuOXdl12Qq6f14eD4iYSqLxnFs.png"),
     tags: ["Client", "Lead Product Designer", "Team"],
     kind: "product",
@@ -132,9 +132,9 @@ export const projects: Project[] = [
     slug: "cavalry",
     title: "Architecting B2B Ecosystem",
     description:
-      "Transformed a static one-pager to multi-page client facing website developing trust and reducing application friction",
+      "Rebuilt a one-page insurance site into a scalable B2B ecosystem.",
     recruiter:
-      "Solo intern who rebuilt Cavalry Insurance from a broken one-pager into a multi-page B2B site plus a 22-page handoff handbook.",
+      "Rebuilt Cavalry’s B2B site and delivered a 22-page handoff handbook.",
     image: framer("Dj8H0FgrLdQKdPi6NOKEkI3BMvU.png"),
     tags: ["Internship", "Solo Product Designer", "Solo"],
     kind: "product",
@@ -145,9 +145,9 @@ export const projects: Project[] = [
     slug: "sonaride",
     title: "SonaRide",
     description:
-      "Hearing-impaired moped concept spanning hardware, navigation HUD, and companion interface.",
+      "Designed an accessible moped, navigation HUD, and companion app.",
     recruiter:
-      "Designed an accessible moped concept connecting physical controls, a navigation HUD, and a companion mobile experience.",
+      "Connected physical controls, navigation, and mobile UX in one accessible concept.",
     image: framer("6kuU00WQfGEmxaXAXdsEa1qVEjk.png"),
     tags: ["Project", "Product Designer", "Team"],
     kind: "product",
@@ -159,9 +159,9 @@ export const projects: Project[] = [
     slug: "gotr",
     title: "Coach Recruitment",
     description:
-      "Developed marketing material for Girls on the Run UPMC that will be used during community events and outreach",
+      "Created community outreach materials to support coach recruitment.",
     recruiter:
-      "Designed outreach and recruitment materials for Girls on the Run UPMC, used at community events.",
+      "Designed coach-recruitment materials for Girls on the Run UPMC events.",
     image: framer("fN171GJxLejXj3WBF94ehUI7NQ.png"),
     tags: ["Partner", "Product Designer", "Team"],
     kind: "product",

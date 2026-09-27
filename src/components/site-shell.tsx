@@ -55,6 +55,9 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
               fullPageStudy ? "hidden" : "flex flex-col"
             }`}
           >
+            <div className="marble-field" aria-hidden>
+              <span className="marble-orb" />
+            </div>
             <div className="grain absolute inset-0 opacity-35" />
             <div className="relative z-10 grid gap-7 min-[351px]:grid-cols-2 min-[351px]:items-center min-[801px]:flex min-[801px]:min-h-0 min-[801px]:flex-1 min-[801px]:flex-col min-[801px]:items-stretch min-[801px]:justify-between min-[801px]:gap-0">
               <div className="min-w-0 min-[801px]:contents">
@@ -86,7 +89,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                 </div>
 
                 <div className="mt-5 min-[801px]:mt-3">
-                  <p className="mb-1 text-[10px] leading-3 text-ink/45">
+                  <p className="mb-1 text-[10px] leading-3 text-ink/70">
                     what i&apos;m listening to while making this portfolio
                   </p>
                   <NowPlaying />
@@ -96,24 +99,24 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 
             <div className="relative z-10 mt-6 hidden shrink-0 min-[351px]:block min-[801px]:mt-3">
               <SidebarContact items={contactItems} />
-              <p className="mt-3 text-[10px] text-ink/35">© {site.name} 2026</p>
+              <p className="mt-3 text-[10px] text-ink/70">© {site.name} 2026</p>
             </div>
           </aside>
 
           <div className="figjam-canvas flex min-h-screen flex-col">
-            <header className="sticky top-0 z-20 flex items-center justify-between gap-3 bg-[#f4f4f1]/80 px-3 py-3 backdrop-blur-sm min-[351px]:px-8 min-[801px]:px-10">
-              <Link href="/" className="flex shrink-0 items-center gap-2.5">
+            <header className="sticky top-0 z-20 flex items-center justify-between gap-2 bg-[#f4f4f1]/80 px-2.5 py-2.5 backdrop-blur-sm min-[351px]:gap-3 min-[351px]:px-6 min-[351px]:py-3 min-[801px]:px-10">
+              <Link href="/" className="flex min-w-0 shrink-0 items-center gap-1.5 min-[351px]:gap-2">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/illustration.png"
+                  src="/studying.gif"
                   alt="Annabelle Chow"
-                  className="h-10 w-10 object-contain min-[351px]:h-16 min-[351px]:w-16"
+                  className="h-9 w-9 object-contain min-[351px]:h-12 min-[351px]:w-12 min-[801px]:h-14 min-[801px]:w-14"
                 />
-                <span className="hidden text-[14px] font-medium tracking-[-0.01em] text-ink min-[351px]:inline">
+                <span className="hidden whitespace-nowrap text-[13px] font-normal tracking-[-0.01em] text-crayon min-[351px]:inline min-[801px]:text-[14px]">
                   Annabelle Chow
                 </span>
               </Link>
-              <nav className="flex items-center gap-3 text-[12px] min-[351px]:gap-8 min-[351px]:text-[15px]">
+              <nav className="flex items-center gap-2.5 whitespace-nowrap text-[11px] min-[351px]:gap-5 min-[351px]:text-[13px] min-[601px]:gap-7 min-[601px]:text-[14px]">
                 {nav.map((item) => {
                   const active =
                     item.href === "/"
@@ -142,7 +145,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 
         <footer className="figjam-canvas block px-4 pb-6 pt-2 min-[351px]:hidden">
           <SidebarContact items={contactItems} />
-          <p className="mt-3 text-[10px] text-ink/35">© {site.name} 2026</p>
+          <p className="mt-3 text-[10px] text-ink/70">© {site.name} 2026</p>
         </footer>
       </div>
       <CaseStudyOverlay />

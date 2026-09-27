@@ -34,11 +34,24 @@ export function SidebarIllustration() {
       />
       <span
         aria-hidden
-        className={`absolute bottom-0 left-1/2 w-[88.4%] -translate-x-1/2 text-center font-serif text-[1rem] text-crayon transition-opacity duration-200 ${
-          welcoming ? "opacity-100" : "opacity-0"
-        }`}
+        className="absolute bottom-0 left-1/2 flex w-full -translate-x-1/2 items-end justify-center gap-0.5 text-crayon"
       >
-        welcome!
+        <span className="-rotate-3 pb-0.5 text-[1rem] leading-none [font-family:'Bradley_Hand','Comic_Sans_MS',cursive]">
+          {welcoming ? "welcome!" : "say hello"}
+        </span>
+        <svg
+          viewBox="0 0 42 34"
+          className="h-8 w-10 -rotate-12"
+          fill="none"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden
+        >
+          <path d="M38 30c-5-11-15-19-30-22" strokeWidth="1.6" />
+          <path d="m8 8 7-2M8 8l3 7" strokeWidth="1.6" />
+          <path d="M38 31c-4-10-15-18-29-21" strokeWidth="0.7" opacity=".55" />
+        </svg>
       </span>
     </button>
   );

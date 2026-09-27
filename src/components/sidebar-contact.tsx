@@ -24,7 +24,7 @@ export function SidebarContact({ items }: { items: ContactItem[] }) {
 
   return (
     <div className="border-t border-ink/10 pt-4">
-      <p className="text-[10px] uppercase tracking-[0.14em] text-ink/40">Contact</p>
+      <p className="text-[10px] uppercase tracking-[0.14em] text-ink/70">Contact</p>
       <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2">
         {items.map((item) => (
           <div key={item.label} className="group/contact inline-flex items-center">
@@ -32,7 +32,7 @@ export function SidebarContact({ items }: { items: ContactItem[] }) {
               href={item.href}
               target={item.href.startsWith("mailto:") ? undefined : "_blank"}
               rel={item.href.startsWith("mailto:") ? undefined : "noreferrer"}
-              className="text-[12px] text-ink/65 transition hover:text-ink hover:underline hover:underline-offset-4"
+              className="text-[12px] text-ink/75 transition hover:text-ink hover:underline hover:underline-offset-4"
             >
               {item.label}
             </a>
@@ -41,7 +41,7 @@ export function SidebarContact({ items }: { items: ContactItem[] }) {
               onClick={() => void copy(item)}
               aria-label={`Copy ${item.label}`}
               title={copied === item.label ? "Copied" : `Copy ${item.label}`}
-              className="ml-0 flex w-0 translate-x-1 items-center justify-center overflow-hidden text-ink/35 opacity-0 transition-all hover:text-ink focus:ml-1 focus:w-4 focus:translate-x-0 focus:opacity-100 group-hover/contact:ml-1 group-hover/contact:w-4 group-hover/contact:translate-x-0 group-hover/contact:opacity-100"
+              className="ml-0 flex w-0 translate-x-1 items-center justify-center overflow-hidden text-ink/70 opacity-0 transition-all hover:text-ink focus:ml-1 focus:w-4 focus:translate-x-0 focus:opacity-100 group-hover/contact:ml-1 group-hover/contact:w-4 group-hover/contact:translate-x-0 group-hover/contact:opacity-100"
             >
               {copied === item.label ? <CheckIcon /> : <CopyIcon />}
             </button>

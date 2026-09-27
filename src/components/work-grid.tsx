@@ -9,6 +9,7 @@ import { projects, visualCards, type WorkKind } from "@/lib/content";
 
 const filters: { id: WorkKind; label: string }[] = [
   { id: "product", label: "Product" },
+  { id: "visual", label: "Visual" },
 ];
 
 const tagColors = ["#fff4c2", "#ead9ff", "#d4efd8", "#d6ebff"];
@@ -64,7 +65,7 @@ export function WorkGrid() {
           {visible.map((project, index) => {
             const Card = (
               <article
-                className="figjam-card figjam-card-lift group overflow-hidden"
+                className="figjam-card figjam-card-lift group relative overflow-hidden border-[1.5px] border-ink/10"
                 style={{ rotate: `${[-0.45, 0.55, -0.25, 0.35][index % 4]}deg` }}
               >
                 <div className="overflow-hidden bg-[#e8e4f5]">
@@ -81,7 +82,7 @@ export function WorkGrid() {
                     <div className="checkerboard relative aspect-[16/10]" />
                   )}
                 </div>
-                <div className="px-5 py-4">
+                <div className="relative px-5 py-4">
                   <div className="flex flex-wrap gap-1.5">
                     {project.tags.map((tag, tagIndex) => (
                       <span
@@ -97,10 +98,22 @@ export function WorkGrid() {
                       </span>
                     ))}
                   </div>
-                  <h2 className="mt-2.5 text-[1.15rem] font-semibold leading-snug tracking-[-0.02em]">
-                    {project.title}
-                  </h2>
-                  <p className="mt-1.5 line-clamp-2 text-[14px] leading-5 text-muted">
+                  <div className="mt-2.5 flex items-start justify-between gap-3">
+                    <h2 className="text-[1.15rem] font-semibold leading-snug tracking-[-0.02em]">
+                      {project.title}
+                    </h2>
+                    {project.locked ? (
+                      <span
+                        role="img"
+                        aria-label="Password protected"
+                        title="Password protected"
+                        className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-lavender/55 text-crayon"
+                      >
+                        <LockIcon />
+                      </span>
+                    ) : null}
+                  </div>
+                  <p className="mt-1.5 line-clamp-1 text-[14px] leading-5 text-muted">
                     {recruiter ? project.recruiter : project.description}
                   </p>
                 </div>
@@ -136,6 +149,28 @@ export function WorkGrid() {
         </div>
       )}
     </div>
+  );
+}
+
+function LockIcon() {
+  return (
+    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden>
+      <rect
+        x="3.25"
+        y="7"
+        width="9.5"
+        height="6.75"
+        rx="1.5"
+        stroke="currentColor"
+        strokeWidth="1.4"
+      />
+      <path
+        d="M5.5 7V5.25a2.5 2.5 0 0 1 5 0V7"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+      />
+    </svg>
   );
 }
 

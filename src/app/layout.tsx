@@ -23,7 +23,12 @@ export const metadata: Metadata = {
   },
   description: site.bio,
   icons: {
-    icon: [{ url: "/studying.gif", type: "image/gif" }],
+    icon: [
+      { url: "/character-favicon.gif", type: "image/gif" },
+      { url: "/character-favicon.png", type: "image/png", sizes: "64x64" },
+    ],
+    shortcut: "/character-favicon.png",
+    apple: "/character-apple-icon.png",
   },
 };
 

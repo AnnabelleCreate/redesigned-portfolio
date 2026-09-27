@@ -10,12 +10,14 @@ const favoriteProducts = [
   {
     name: "Woozoo Fan",
     category: "Industrial design",
+    image: "/woozoo-fan.jpg",
     color: "#fff4c2",
     rotate: "-1.2deg",
   },
   {
     name: "HEYTEA App",
     category: "Digital product design",
+    image: "/heytea-app.webp",
     color: "#ead9ff",
     rotate: "1deg",
   },
@@ -43,7 +45,7 @@ export default function AboutPage() {
             hello! i&apos;m Annabelle :D
           </p>
           <p className="mt-4 text-[17px] leading-7 text-muted">
-            Junior at Carnegie Mellon studying Business Administration and HCI. I care
+            Senior at Carnegie Mellon studying Business Administration and HCI. I care
             about the messy middle of systems — operations, trust, and the interfaces
             people actually have to live inside.
           </p>
@@ -104,8 +106,14 @@ export default function AboutPage() {
                   aria-hidden
                   className="absolute left-1/2 top-2 z-10 h-3 w-3 -translate-x-1/2 rounded-full bg-crayon shadow-sm"
                 />
-                <div className="flex aspect-[4/3] items-center justify-center rounded-lg border border-dashed border-ink/15 bg-[#f8f7f3] text-[11px] uppercase tracking-[0.12em] text-ink/35">
-                  Add product image
+                <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-[#f8f7f3]">
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    className="object-contain p-3"
+                    sizes="(min-width: 601px) 40vw, 90vw"
+                  />
                 </div>
                 <div
                   className="figjam-sticky relative -mt-3 ml-3 inline-block px-3 py-2"
