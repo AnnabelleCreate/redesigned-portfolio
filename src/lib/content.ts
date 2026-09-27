@@ -171,24 +171,47 @@ export const projects: Project[] = [
   },
 ];
 
-export const visualCards = [
+export type VisualCard = {
+  id: string;
+  title: string;
+  description: string;
+  image?: string;
+  href?: string;
+  tags: string[];
+  comingSoon?: boolean;
+};
+
+export const visualCards: VisualCard[] = [
   {
-    id: "visual-compact",
-    size: "compact" as const,
-    title: "Title",
-    description: "Description",
+    id: "robotics-data-summit",
+    title: "Robotics & Data Summit",
+    description: "Event identity, social campaign, and editorial booklet.",
+    image: "/robotics-data-summit/summit-flyer.jpg",
+    href: "/visual/robotics-data-summit",
+    tags: ["Event identity", "Marketing design"],
   },
   {
-    id: "visual-tall",
-    size: "tall" as const,
-    title: "Title",
-    description: "Description",
+    id: "nova-ai-hackathon",
+    title: "NOVA: AI Hackathon",
+    description: "Hackathon identity and campaign design.",
+    tags: ["Brand identity", "Event design"],
+    comingSoon: true,
   },
   {
-    id: "visual-wide",
-    size: "wide" as const,
-    title: "Title",
-    description: "Description",
+    id: "uxa",
+    title: "UXA",
+    description: "Community branding and visual design.",
+    image: "/visual-work/uxa.jpg",
+    tags: ["Brand identity", "Community"],
+    comingSoon: true,
+  },
+  {
+    id: "cmu-btg",
+    title: "CMU BTG",
+    description: "Product studio marketing and event design.",
+    image: "/visual-work/cmu-btg.png",
+    tags: ["Marketing", "Event design"],
+    comingSoon: true,
   },
 ];
 

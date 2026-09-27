@@ -36,7 +36,8 @@ const contactItems = [
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const fullPageStudy = pathname.startsWith("/work/");
+  const fullPageStudy =
+    pathname.startsWith("/work/") || pathname.startsWith("/visual/");
 
   return (
     <>
@@ -120,7 +121,9 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                 {nav.map((item) => {
                   const active =
                     item.href === "/"
-                      ? pathname === "/" || pathname.startsWith("/work")
+                      ? pathname === "/" ||
+                        pathname.startsWith("/work") ||
+                        pathname.startsWith("/visual")
                       : pathname.startsWith(item.href);
                   return (
                     <Link

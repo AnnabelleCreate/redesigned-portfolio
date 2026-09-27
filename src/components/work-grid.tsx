@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRecruiter } from "@/components/recruiter";
 import { useStudyOverlay } from "@/components/study-overlay";
 import { projects, visualCards, type WorkKind } from "@/lib/content";
@@ -19,6 +19,15 @@ export function WorkGrid() {
   const [filter, setFilter] = useState<WorkKind>("product");
   const { recruiter } = useRecruiter();
   const { openStudy } = useStudyOverlay();
+
+  useEffect(() => {
+    const syncFilterToHash = () => {
+      if (window.location.hash === "#visual") setFilter("visual");
+    };
+    syncFilterToHash();
+    window.addEventListener("hashchange", syncFilterToHash);
+    return () => window.removeEventListener("hashchange", syncFilterToHash);
+  }, []);
 
   const visible = useMemo(
     () =>
@@ -45,7 +54,14 @@ export function WorkGrid() {
             <button
               key={item.id}
               type="button"
-              onClick={() => setFilter(item.id)}
+              onClick={() => {
+                setFilter(item.id);
+                window.history.replaceState(
+                  null,
+                  "",
+                  item.id === "visual" ? "/#visual" : "/",
+                );
+              }}
               className={`rounded-lg px-3.5 py-1.5 text-[13px] transition ${
                 filter === item.id
                   ? "bg-lavender font-medium text-ink"
@@ -175,44 +191,138 @@ function LockIcon() {
 }
 
 function VisualBento() {
+  const { openStudy } = useStudyOverlay();
+  const featured = visualCards.filter((card) => !card.comingSoon);
+  const upcoming = visualCards.filter((card) => card.comingSoon);
+
   return (
-    <div className="grid grid-cols-1 items-start gap-5 min-[801px]:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] min-[801px]:grid-rows-[auto_auto]">
-      {visualCards.map((card) => (
-        <article
-          key={card.id}
-          className={`relative overflow-hidden rounded-[28px] bg-white shadow-[0_8px_30px_rgba(40,24,70,0.06)] ${
-            card.size === "compact"
-              ? "min-[801px]:col-start-1 min-[801px]:row-start-1"
-              : card.size === "tall"
-                ? "min-[801px]:col-start-2 min-[801px]:row-start-1"
-                : "min-[801px]:col-span-2"
-          }`}
-        >
-          <div
-            className={`checkerboard ${
-              card.size === "compact"
-                ? "aspect-[4/5] min-h-[240px]"
-                : card.size === "tall"
-                  ? "aspect-[4/5] min-h-[320px] min-[801px]:aspect-[5/6]"
-                  : "aspect-[16/9] min-h-[260px]"
-            }`}
-          />
-          <div
-            className={`pointer-events-none absolute bottom-4 left-4 ${
-              card.size === "wide" ? "right-auto w-[min(100%,420px)]" : "right-4"
-            }`}
+    <div className="space-y-5">
+      <div className="grid gap-5">
+        {featured.map((card) => (
+          <Link
+            key={card.id}
+            href={card.href ?? "/"}
+            onClick={(event) => {
+              if (
+                event.metaKey ||
+                event.ctrlKey ||
+                event.shiftKey ||
+                event.altKey ||
+                event.button !== 0
+              ) {
+                return;
+              }
+              event.preventDefault();
+              openStudy(`visual:${card.id}`);
+            }}
+            className="group block rounded-[28px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-crayon"
           >
-            <div className="crayon-caption px-5 py-4">
-              <p className="text-[15px] font-bold uppercase tracking-[0.04em] text-ink">
-                {card.title}
-              </p>
-              <p className="mt-0.5 text-[12px] uppercase tracking-[0.08em] text-muted">
-                {card.description}
-              </p>
+            <article className="grid overflow-hidden rounded-[28px] border border-white/10 bg-[#05070a] shadow-[0_12px_36px_rgba(15,18,28,0.18)] min-[601px]:grid-cols-[minmax(13rem,0.72fr)_minmax(0,1fr)]">
+              <div className="relative aspect-[3/4] overflow-hidden bg-black">
+                {card.image ? (
+                  <Image
+                    src={card.image}
+                    alt=""
+                    fill
+                    className="object-contain transition duration-700 group-hover:scale-[1.025]"
+                    sizes="(min-width: 801px) 26vw, (min-width: 601px) 38vw, 94vw"
+                  />
+                ) : null}
+              </div>
+              <div className="relative flex min-h-64 flex-col justify-between overflow-hidden p-6 text-white min-[601px]:p-8">
+                <div
+                  aria-hidden
+                  className="absolute -right-20 -top-20 h-56 w-56 rounded-full border border-white/10 bg-[radial-gradient(circle_at_35%_35%,rgba(161,187,226,0.36),rgba(22,42,70,0.08)_58%,transparent_70%)] blur-[1px] transition duration-700 group-hover:scale-110"
+                />
+                <div className="relative flex flex-wrap gap-2">
+                  {card.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[10px] uppercase tracking-[0.1em] text-white/75"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <div className="relative mt-14">
+                  <p className="text-[11px] uppercase tracking-[0.16em] text-white/45">
+                    Visual work
+                  </p>
+                  <h2 className="mt-2 font-serif text-3xl tracking-[-0.03em] min-[801px]:text-4xl">
+                    {card.title}
+                  </h2>
+                  <p className="mt-3 max-w-sm text-[14px] leading-6 text-white/62">
+                    {card.description}
+                  </p>
+                  <span className="mt-6 inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.12em] text-white/85">
+                    View project <span aria-hidden>↗</span>
+                  </span>
+                </div>
+              </div>
+            </article>
+          </Link>
+        ))}
+      </div>
+
+      <div className="grid gap-4 min-[500px]:grid-cols-2 min-[1000px]:grid-cols-3">
+        {upcoming.map((card, index) => (
+          <article
+            key={card.id}
+            className="group overflow-hidden rounded-[24px] border border-ink/10 bg-white shadow-[0_8px_24px_rgba(40,24,70,0.07)]"
+            style={{ rotate: `${[-0.35, 0.4, -0.2][index % 3]}deg` }}
+          >
+            <div
+              className={`relative aspect-square overflow-hidden ${
+                card.id === "nova-ai-hackathon"
+                  ? "bg-[radial-gradient(circle_at_70%_20%,#846ee0_0,transparent_30%),linear-gradient(145deg,#171128,#2b2256_55%,#0d0a16)]"
+                  : "bg-black"
+              }`}
+            >
+              {card.image ? (
+                <Image
+                  src={card.image}
+                  alt={`${card.title} logo`}
+                  fill
+                  className="object-contain transition duration-500 group-hover:scale-[1.035]"
+                  sizes="(min-width: 1000px) 20vw, (min-width: 500px) 42vw, 92vw"
+                />
+              ) : (
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
+                  <span className="text-[10px] uppercase tracking-[0.35em] text-white/55">
+                    AI Hackathon
+                  </span>
+                  <span className="mt-2 font-serif text-[clamp(2.8rem,8vw,4.5rem)] tracking-[-0.06em]">
+                    NOVA
+                  </span>
+                  <span
+                    aria-hidden
+                    className="mt-5 h-px w-24 bg-gradient-to-r from-transparent via-white/70 to-transparent"
+                  />
+                </div>
+              )}
+              <span className="absolute right-3 top-3 rounded-full border border-white/20 bg-black/55 px-3 py-1 text-[9px] uppercase tracking-[0.14em] text-white backdrop-blur-md">
+                Coming soon
+              </span>
             </div>
-          </div>
-        </article>
-      ))}
+            <div className="px-5 py-4">
+              <div className="flex flex-wrap gap-1.5">
+                {card.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-full bg-lavender/55 px-2.5 py-1 text-[10px] uppercase tracking-[0.08em] text-crayon"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <h2 className="mt-3 text-[1.05rem] font-semibold leading-snug">
+                {card.title}
+              </h2>
+              <p className="mt-1 text-[13px] leading-5 text-muted">{card.description}</p>
+            </div>
+          </article>
+        ))}
+      </div>
     </div>
   );
 }

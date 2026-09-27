@@ -3,29 +3,25 @@
 import { useEffect, useState } from "react";
 import { CaseStudyGate, PasswordOverlay } from "@/components/case-study-gate";
 import { CaseStudyView } from "@/components/case-study-view";
+import { RoboticsDataSummitView } from "@/components/robotics-data-summit-view";
 import { useStudyOverlay } from "@/components/study-overlay";
 import { getCaseStudy } from "@/lib/content";
 import { hasUnlockedStudies } from "@/lib/study-password";
 
 export function CaseStudyOverlay() {
   const { slug, closeStudy } = useStudyOverlay();
-  const study = slug ? getCaseStudy(slug) : undefined;
+  const visualProject = slug === "visual:robotics-data-summit";
+  const study = slug && !visualProject ? getCaseStudy(slug) : undefined;
   const [unlocked, setUnlocked] = useState(false);
 
   useEffect(() => {
-    if (!study) {
-      setUnlocked(false);
-      return;
-    }
-    if (!study.locked) {
-      setUnlocked(true);
-      return;
-    }
-    setUnlocked(hasUnlockedStudies());
+    const nextUnlocked = study ? !study.locked || hasUnlockedStudies() : false;
+    const timer = window.setTimeout(() => setUnlocked(nextUnlocked), 0);
+    return () => window.clearTimeout(timer);
   }, [study]);
 
   useEffect(() => {
-    if (!study || (study.locked && !unlocked)) return;
+    if ((!study && !visualProject) || (study?.locked && !unlocked)) return;
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const onKey = (event: KeyboardEvent) => {
@@ -36,13 +32,15 @@ export function CaseStudyOverlay() {
       document.body.style.overflow = previous;
       window.removeEventListener("keydown", onKey);
     };
-  }, [study, unlocked, closeStudy]);
+  }, [study, visualProject, unlocked, closeStudy]);
 
-  if (!study) return null;
+  if (!study && !visualProject) return null;
 
-  if (study.locked && !unlocked) {
+  if (study?.locked && !unlocked) {
     return <PasswordOverlay onUnlock={() => setUnlocked(true)} onClose={closeStudy} />;
   }
+
+  const title = visualProject ? "Robotics & Data Summit" : study?.title;
 
   return (
     <div
@@ -58,11 +56,11 @@ export function CaseStudyOverlay() {
       <div
         role="dialog"
         aria-modal="true"
-        aria-label={study.title}
+        aria-label={title}
         className="figjam-canvas relative z-10 flex h-[80vh] w-[min(100%,80vw)] flex-col overflow-hidden rounded-2xl border border-ink/10 shadow-[0_24px_80px_rgba(28,23,48,0.28)]"
       >
         <div className="flex shrink-0 items-center justify-between gap-4 border-b border-ink/8 bg-white/80 px-5 py-3">
-                  <p className="truncate text-[13px] text-muted">{study.title}</p>
+          <p className="truncate text-[13px] text-muted">{title}</p>
           <button
             type="button"
             onClick={closeStudy}
@@ -72,9 +70,13 @@ export function CaseStudyOverlay() {
           </button>
         </div>
         <div className="min-h-0 flex-1 overflow-y-auto" data-study-scroll>
-          <CaseStudyGate locked={study.locked}>
-            <CaseStudyView study={study} onClose={closeStudy} />
-          </CaseStudyGate>
+          {visualProject ? (
+            <RoboticsDataSummitView overlay />
+          ) : study ? (
+            <CaseStudyGate locked={study.locked}>
+              <CaseStudyView study={study} onClose={closeStudy} />
+            </CaseStudyGate>
+          ) : null}
         </div>
       </div>
     </div>
